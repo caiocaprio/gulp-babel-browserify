@@ -1,5 +1,6 @@
 {
     "presets": [
         "env"
-    ]
+    ],
+    "plugins": ["transform-runtime", "transform-object-assign", "rewire", "lodash", "inline-replace-variables", "transform-object-rest-spread"]
 }

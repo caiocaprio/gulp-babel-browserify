@@ -1,41 +1,30 @@
-// import {Modal} from './component/modal.js';
-
-// class Main {
-//     constructor(){
-//         console.log('Hello Main.')
-//         this.modal = new Modal();
-//         this.metodo();
-//     }
-//     metodo(){        
-//         this.modal.metodo();
-//     }
-// }
-
-// var main = new Main();
-
 "use strict";
-// import {createClient} from '../../node_modules/contentful/dist/es-modules/contentful'
-import {createClient} from 'contentful'
+import { createClient } from 'contentful'
+import * as config from './config'
 
-const SPACE_ID = '';
-const ACCESS_TOKEN = '';
-const ACCESS_TOKEN_PREVIEW = '';
-const ENVIRONMENT_ID = 'master';
-
+require('babelify-es6-polyfill');
 
 const client = createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
-    space: SPACE_ID,
-    environment:ENVIRONMENT_ID,
+    space: config.SPACE_ID,
+    environment: config.ENVIRONMENT_ID,
     // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-    accessToken: ACCESS_TOKEN,
-    // host: 'preview.contentful.com'
-  })
-  
-  client.getEntries({
-    content_type: 'course',
-    select: 'sys.id,'+ 
-            'fields.title,'
-  })
-.then((response) => console.log(response.items))
-.catch((err) => console.log(err))
+    accessToken: config.ACCESS_TOKEN_DELIVERY,
+    // host: 'preview.contentful.com' 
+})
+
+client.getEntries({
+        content_type: 'planos',
+        select: 'sys.id,' +
+            'fields.namePlan,' +
+            'fields.descriptionPlan,' +
+            'fields.franchisePlan,' +
+            'fields.bonusPlan,' +
+            'fields.priceOldPlan,' +
+            'fields.photoPlan,' +
+            'fields.BenefitsRelationship'
+    })
+    .then((response) => {
+        console.log(response.items)
+    })
+    .catch((err) => console.log(err))
